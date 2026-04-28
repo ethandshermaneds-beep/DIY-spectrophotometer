@@ -6,9 +6,9 @@ import os
 
 def load_and_plot_spectra():
     filepaths = filedialog.askopenfilenames(
-        initialdir="C:/Users/Hanna/OneDrive - Asbury University/2026 Spring/CHE 322 CHE 422/from spectrophotometer",
+        initialdir="C:/Users/username/path", #fill in the path to the folder where spectra are being written
         title="Choose spectra to read",
-        filetypes=(("Spectra", "*.csv"), ("Nitrates", "*.nit"), ("Quasicrystals", "*.qsc"), ("Fluorescent probes", "*.flp"))
+        filetypes=(("Spectra", "*.csv"))
     )
 
     if filepaths:
@@ -28,11 +28,11 @@ def load_and_plot_spectra():
         plt.show(block=False) 
 
 root = tk.Tk()
-root.title("Spectra Viewer")
+root.title("Spectrum Viewer")
 
 root.geometry("300x100") 
 
 plot_button = tk.Button(root, text="Open and Plot Spectra", command=load_and_plot_spectra)
-plot_button.pack(expand=True) # Centers the button in the window
+plot_button.pack(expand=True)
 
 root.mainloop()
