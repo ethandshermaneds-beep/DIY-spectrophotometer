@@ -11,7 +11,7 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
 
-WATCH_FOLDER = r"C:\Users\Hanna\OneDrive - Asbury University\2026 Spring\CHE 322 CHE 422\from spectrophotometer"
+WATCH_FOLDER = r"C:\Users\username\path" #fill in with the path to the folder where new spectra are being written
 
 
 class CSVHandler(FileSystemEventHandler):
@@ -22,7 +22,7 @@ class CSVHandler(FileSystemEventHandler):
         if event.src_path.endswith(".csv"):
             print(f"New spectrum detected: {event.src_path}")
 
-            time.sleep(1)  # allow file transfer to finish
+            time.sleep(1)
 
             try:
                 process_csv(event.src_path)
@@ -64,7 +64,7 @@ def start_watcher():
 
 
 def blank():
-    HOST = 'strawberry-pie'
+    HOST = 'hostname' #fill in the hostname of the RPi you'll be using
     PORT = 5000
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -76,7 +76,7 @@ def blank():
             messagebox.showerror("Connection Error", "Cannot connect to Pi.")
 
 def sample():
-    HOST = 'strawberry-pie'
+    HOST = 'hostname' #fill in the hostname of the RPi you'll be using
     PORT = 5000
 
     name = entry.get()
