@@ -10,10 +10,10 @@ from ADCDifferentialPi import ADCDifferentialPi
 
 adc = ADCDifferentialPi(0x68, 0x68, 18)
 
-remote_user = "Hanna"
-remote_host = "Pliny-the-Elder"
-remote_path = "C:/Users/Hanna/OneDrive - Asbury University/2026 Spring/CHE 322 CHE 422/from spectrophotometer"
-local_dir = "/home/spectrophotometer/"
+remote_user = "Username" #Username on the controlling computer (not the rpi)
+remote_host = "Hostname" #Hostname of the controlling computer
+remote_path = "C:/Users/Username/path/to/directory" #where files will be written to on the controlling computer
+local_dir = "/home/username" #directory on the rpi
 
 spectrum = None
 _current_file = None
@@ -49,13 +49,13 @@ def blank(steps=150, delay=.01):
         GPIO.output(STEP, GPIO.LOW)
         time.sleep(delay)
         voltage1 = adc.read_voltage(1)
-        bar = int ((abs(voltage1) - .007) * 32768)
+        bar = int ((abs(voltage1) - .007) * 32768) #.007 is the ambient light level with the box lid closed
         if bar >= 150:
             bar = 0
         print(f"{voltage1:.6f} V","█" * bar)
         voltage2 = adc.read_voltage(1)
         voltage0 = (voltage1 + voltage2) / 2
-        voltage = voltage0 - .007
+        voltage = voltage0 - .007 #.007 is the ambient light level with the box lid closed
         spectrum.append(voltage)
     GPIO.output(DIR, GPIO.HIGH)
     for _ in range(abs(steps)):
@@ -72,13 +72,13 @@ def step_motor(steps=150, delay=.01):
         GPIO.output(STEP, GPIO.LOW)
         time.sleep(delay)
         voltage1 = adc.read_voltage(1)
-        bar = int ((abs(voltage1) - .007) * 32768)
+        bar = int ((abs(voltage1) - .007) * 32768) #.007 is the ambient light level with the box lid closed
         if bar >= 150:
             bar = 0
         print(f"{voltage1:.6f} V","█" * bar)
         voltage2 = adc.read_voltage(1)
         voltage0 = (voltage1 + voltage2) / 2
-        voltage = voltage0 - .007
+        voltage = voltage0 - .007 #.007 is the ambient light level with the box lid closed
         newline(voltage)
     GPIO.output(DIR, GPIO.HIGH)
     for _ in range(abs(steps)):
